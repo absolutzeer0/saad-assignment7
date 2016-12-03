@@ -207,7 +207,18 @@ public class University {
         }
         return countP;
     }
+ public int professorsWithCurrentClasses() {
 
+        int countP = 0;
+        for (int i = 0; i < employees.size(); i++) {            
+            if (employees.get(i) instanceof Professor) {
+                if(((Professor)(employees.get(i))).getCurrentCourse()!= null){
+                    countP++;
+                }
+            }            
+        }
+        return countP;
+    }
     public int coursesWithoutStudents() {
 
         int countC = 0;
@@ -250,12 +261,11 @@ public class University {
     public boolean addPrerequiste(String prerequesite, String idCourseToAddPrerequsite) {
 
         //Course tempCourseP = querySpecificCourse(prerequesite);
-       // Course cP = new Course(tempCourseP.getIdCourse(), tempCourseP.getNameCourse(), tempCourseP.getSemestersOffered());
-
+        // Course cP = new Course(tempCourseP.getIdCourse(), tempCourseP.getNameCourse(), tempCourseP.getSemestersOffered());
         Course tempCourse = querySpecificCourse(idCourseToAddPrerequsite);
 
         if (tempCourse != null) {
-            
+
             this.courses.get(courses.indexOf(tempCourse)).getCoursesPrerequisiteIDs().add(prerequesite);
 
             return true;
@@ -266,8 +276,7 @@ public class University {
     }
 
     public boolean doAssigments(String idProfessor, String idCourse, int capStudents) {
-
-        boolean success = false;
+        if(professorsWithCurrentClasses()<=5){
         Course tempCourse = querySpecificCourse(idCourse);
         Professor tempProfe = querySpecificProfessor(idProfessor);
         if (tempCourse != null) {
@@ -276,16 +285,21 @@ public class University {
                     this.courses.get(i).setCapStudents(capStudents);
                     if (tempProfe != null) {
                         
-                        tempProfe.setCurrentCourse(this.courses.get(i));
+                      ((Professor)(this.getEmployees().get(this.getEmployees().indexOf(tempProfe)))).setCurrentCourse(this.courses.get(i));
+                        //tempProfe.setCurrentCourse(this.courses.get(i));
+                        
                         return true;
                     }
                 }
             }
-            return success;
+
         } else {
             return false;
         }
-
+        return false;
+        }else{
+            return false;
+        }
     }
 
     public String handleRequestStudent(String studentID, String courseIDRequested) {
