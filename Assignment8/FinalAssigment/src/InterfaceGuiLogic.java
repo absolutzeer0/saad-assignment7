@@ -1,5 +1,6 @@
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
@@ -31,6 +32,11 @@ public class InterfaceGuiLogic {
     public InterfaceGuiLogic() {
     //SloadFiles();
     //doAssigments();
+    }
+    
+    public String digestFileWithWeka(File inputFile) throws Exception{
+        WekaConverter wc = new WekaConverter();
+        return wc.aprioriReadout(inputFile);
     }
 
     public void loadFiles() {

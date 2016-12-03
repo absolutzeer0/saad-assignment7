@@ -1,5 +1,6 @@
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
@@ -22,7 +23,7 @@ import java.util.logging.Logger;
  */
 public class Main {
 
-    public static void main(String args[]) throws IOException {
+    public static void main(String args[]) throws IOException, Exception {
 
         /*
            
@@ -35,6 +36,12 @@ public class Main {
 //            System.out.println(u.queryRequestsFailedPrere());
 //            System.out.println(u.queryRequestsFailedPerformance());
 //            System.out.println(u.queryRequestsFailedCap());
+
+        /////////this just shows how to use the wekaconverter object//////////////
+        //InterfaceGuiLogic igl = new InterfaceGuiLogic();
+        //System.out.println(igl.digestFileWithWeka(new File("records.csv")));
+        ////////////////////////////////////////////////////////////////////////
+        
         //Scanner in = new Scanner(System.in);
         InterfaceGuiLogic iG = new InterfaceGuiLogic();
         iG.loadFiles();
